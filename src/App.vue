@@ -12,6 +12,4 @@ export default {
 };
 </script>
 <style src="assets/css/base.css">
-
-/* @import "assets/css/base"; */
 </style>

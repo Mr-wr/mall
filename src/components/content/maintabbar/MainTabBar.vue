@@ -2,11 +2,11 @@
  * @Author: qi-you
  * @Date: 2020-12-02 08:46:50
  * @LastEditors: qi-you
- * @LastEditTime: 2020-12-10 19:20:53
+ * @LastEditTime: 2020-12-11 11:26:43
  * @Descripttion: 
 -->
 <template>
-  <div>
+  <div class="mainTabBar">
     <tab-bar>
       <tab-bar-item path="/home">
         <img slot="item-icon" src="@/assets/img/tabbar/home.svg" alt="" />
@@ -71,7 +71,7 @@ export default {
 </script>
 
 <style>
-img {
+.mainTabBar img {
   margin-top: 4px;
   height: 20px;
   vertical-align: middle;

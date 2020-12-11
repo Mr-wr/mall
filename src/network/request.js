@@ -2,15 +2,14 @@
  * @Author: qi-you
  * @Date: 2020-12-11 09:14:13
  * @LastEditors: qi-you
- * @LastEditTime: 2020-12-11 09:55:41
+ * @LastEditTime: 2020-12-11 11:37:56
  * @Descripttion:
  */
 import axios from "axios";
 
-
 export function request(config) {
   const instance = axios.create({
-    baseURL: "http://152.136.185.210:7878/api/m5" ,
+    baseURL: "http://152.136.185.210:7878/api/m5",
     timeout: 5000
   });
   // 拦截器
@@ -23,7 +22,7 @@ export function request(config) {
     },
     // 请求失败拦截
     err => {
-      console.log("请求失败拦截",err);
+      console.log("请求失败拦截", err);
     }
   );
   instance.interceptors.response.use(
@@ -32,7 +31,7 @@ export function request(config) {
       return res.data;
     },
     err => {
-      console.log("相应失败拦截",err);
+      console.log("相应失败拦截", err);
     }
   );
   return instance(config);
