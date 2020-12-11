@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2020-12-10 11:26:18
  * @LastEditors: qi-you
- * @LastEditTime: 2020-12-10 19:13:47
+ * @LastEditTime: 2020-12-11 09:30:45
  * @Descripttion:
  */
 // module.exports = {
@@ -20,9 +20,10 @@ module.exports = {
     resolve: {
       alias: {
         common: "@/components/common",
-        content:"@/components/content",
+        content: "@/components/content",
         assets: "@/assets",
-        views: "@/views"
+        views: "@/views",
+        network: "@/network"
       }
     }
   }

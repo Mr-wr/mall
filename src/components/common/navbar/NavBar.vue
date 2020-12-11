@@ -44,7 +44,6 @@ export default {
 }
 .center {
   width: 60px;
-
   flex: 1;
 }
 .right {
