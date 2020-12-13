@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2020-12-10 11:26:18
  * @LastEditors: qi-you
- * @LastEditTime: 2020-12-11 09:30:45
+ * @LastEditTime: 2020-12-11 21:21:00
  * @Descripttion:
  */
 // module.exports = {
@@ -23,7 +23,9 @@ module.exports = {
         content: "@/components/content",
         assets: "@/assets",
         views: "@/views",
-        network: "@/network"
+        network: "@/network",
+        img: "assets/img",
+        css: "assets/css"
       }
     }
   }
