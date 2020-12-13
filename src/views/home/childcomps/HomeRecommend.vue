@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2020-12-11 17:33:35
  * @LastEditors: qi-you
- * @LastEditTime: 2020-12-11 18:31:17
+ * @LastEditTime: 2020-12-13 17:33:05
  * @Descripttion: 
 -->
 <template>
@@ -33,7 +33,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .recommend {
   display: flex;
   text-align: center;

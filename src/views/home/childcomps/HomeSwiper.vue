@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2020-12-11 11:32:36
  * @LastEditors: qi-you
- * @LastEditTime: 2020-12-11 15:16:07
+ * @LastEditTime: 2020-12-13 17:33:54
  * @Descripttion: 
 -->
 <template>
@@ -32,5 +32,5 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 </style>

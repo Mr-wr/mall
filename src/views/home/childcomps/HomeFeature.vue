@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2020-12-11 21:16:42
  * @LastEditors: qi-you
- * @LastEditTime: 2020-12-11 21:27:15
+ * @LastEditTime: 2020-12-13 17:32:33
  * @Descripttion: 
 -->
 <template>
@@ -19,7 +19,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .feature img {
   width: 100%;
 }
