@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2020-12-13 13:45:32
  * @LastEditors: qi-you
- * @LastEditTime: 2020-12-13 17:19:32
+ * @LastEditTime: 2020-12-14 18:22:29
  * @Descripttion: 
 -->
 <template>
@@ -39,6 +39,7 @@ export default {
   methods: {
     itemClick(index) {
       this.currentIndex = index;
+      this.$emit("tabClick",index)
     },
   },
 };

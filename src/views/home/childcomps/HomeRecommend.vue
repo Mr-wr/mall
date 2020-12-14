@@ -2,14 +2,14 @@
  * @Author: qi-you
  * @Date: 2020-12-11 17:33:35
  * @LastEditors: qi-you
- * @LastEditTime: 2020-12-13 17:33:05
+ * @LastEditTime: 2020-12-14 19:05:59
  * @Descripttion: 
 -->
 <template>
   <div class="recommend">
     <div class="item" v-for="item in recommend" :key="item.image">
       <div class="img">
-        <a :href="item.link"><img :src="item.image" alt="" /></a>
+        <a href="#"><img :src="item.image" alt="" /></a>
       </div>
       <div class="item-title">{{ item.title }}</div>
     </div>

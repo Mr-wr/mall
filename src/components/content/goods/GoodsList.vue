@@ -2,12 +2,16 @@
  * @Author: qi-you
  * @Date: 2020-12-14 17:24:48
  * @LastEditors: qi-you
- * @LastEditTime: 2020-12-14 18:09:14
+ * @LastEditTime: 2020-12-14 18:49:59
  * @Descripttion: 
 -->
 <template>
   <div class="goods-list">
-    <goods-list-item :goods-item="item" v-for="item in goods" :key="item.show.img"></goods-list-item>
+    <goods-list-item
+      :goods-item="item"
+      v-for="item in goods"
+      :key="item.show.img"
+    ></goods-list-item>
   </div>
 </template>
 
@@ -22,6 +26,7 @@ export default {
       },
     },
   },
+  methods: {},
   components: {
     GoodsListItem,
   },
@@ -29,8 +34,8 @@ export default {
 </script>
 
 <style scoped>
-.goods-list{
-  display:flex;
+.goods-list {
+  display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
 }

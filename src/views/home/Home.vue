@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2020-12-01 17:44:19
  * @LastEditors: qi-you
- * @LastEditTime: 2020-12-14 17:47:06
+ * @LastEditTime: 2020-12-14 18:50:52
  * @Descripttion: 
 -->
 <template>
@@ -13,8 +13,11 @@
     <home-swiper :banners="banners"></home-swiper>
     <home-recommend :recommend="recommends"></home-recommend>
     <home-feature></home-feature>
-    <tab-control :itemArray="['流行', '新款', '精选']"></tab-control>
-    <goods-list :goods="goods['pop'].list"></goods-list>
+    <tab-control
+      @tabClick="tabClick"
+      :itemArray="['流行', '新款', '精选']"
+    ></tab-control>
+    <goods-list :goods="showGoods"></goods-list>
   </div>
 </template>
 <script>
@@ -38,7 +41,13 @@ export default {
         new: { page: 0, list: [] },
         sell: { page: 0, list: [] },
       },
-    };
+      currentType:"pop"
+    };  
+  },
+  computed:{
+    showGoods(){
+      return this.goods[this.currentType].list
+    }
   },
   components: {
     NavBar,
@@ -58,6 +67,24 @@ export default {
     this.getHomeData("sell");
   },
   methods: {
+    // 事件监听
+    tabClick(index) {
+      switch (index) {
+        case 0:
+          this.currentType = "pop"
+          break;
+        case 1:
+          this.currentType = "new"
+          break;
+        case 2:
+          this.currentType = "sell"
+          break;
+        default:
+          break;
+      }
+    },
+
+    // 网络请求
     getHomeMultidata() {
       getHomeMultidata()
         .then((res) => {
