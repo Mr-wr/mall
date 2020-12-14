@@ -2,11 +2,11 @@
  * @Author: qi-you
  * @Date: 2020-12-14 17:24:48
  * @LastEditors: qi-you
- * @LastEditTime: 2020-12-14 17:33:43
+ * @LastEditTime: 2020-12-14 18:09:14
  * @Descripttion: 
 -->
 <template>
-  <div>
+  <div class="goods-list">
     <goods-list-item :goods-item="item" v-for="item in goods" :key="item.show.img"></goods-list-item>
   </div>
 </template>
@@ -29,4 +29,9 @@ export default {
 </script>
 
 <style scoped>
+.goods-list{
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
 </style>
