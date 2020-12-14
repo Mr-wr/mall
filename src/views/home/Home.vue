@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2020-12-01 17:44:19
  * @LastEditors: qi-you
- * @LastEditTime: 2020-12-14 17:14:54
+ * @LastEditTime: 2020-12-14 17:47:06
  * @Descripttion: 
 -->
 <template>
@@ -14,68 +14,17 @@
     <home-recommend :recommend="recommends"></home-recommend>
     <home-feature></home-feature>
     <tab-control :itemArray="['流行', '新款', '精选']"></tab-control>
-    <ul>
-      <li>item1</li>
-      <li>item2</li>
-      <li>item3</li>
-      <li>item4</li>
-      <li>item5</li>
-      <li>item6</li>
-      <li>item7</li>
-      <li>item8</li>
-      <li>item9</li>
-      <li>item10</li>
-      <li>item11</li>
-      <li>item12</li>
-      <li>item13</li>
-      <li>item14</li>
-      <li>item15</li>
-      <li>item16</li>
-      <li>item17</li>
-      <li>item18</li>
-      <li>item19</li>
-      <li>item20</li>
-      <li>item21</li>
-      <li>item22</li>
-      <li>item23</li>
-      <li>item24</li>
-      <li>item25</li>
-      <li>item26</li>
-      <li>item27</li>
-      <li>item28</li>
-      <li>item29</li>
-      <li>item30</li>
-      <li>item31</li>
-      <li>item32</li>
-      <li>item33</li>
-      <li>item34</li>
-      <li>item35</li>
-      <li>item36</li>
-      <li>item37</li>
-      <li>item38</li>
-      <li>item39</li>
-      <li>item40</li>
-      <li>item41</li>
-      <li>item42</li>
-      <li>item43</li>
-      <li>item44</li>
-      <li>item45</li>
-      <li>item46</li>
-      <li>item47</li>
-      <li>item48</li>
-      <li>item49</li>
-      <li>item50</li>
-    </ul>
+    <goods-list :goods="goods['pop'].list"></goods-list>
   </div>
 </template>
 <script>
-import NavBar from "common/navbar/NavBar";
-
 import HomeSwiper from "views/home/childcomps/HomeSwiper";
 import HomeRecommend from "views/home/childcomps/HomeRecommend";
 import HomeFeature from "views/home/childcomps/HomeFeature";
 
 import TabControl from "../../components/content/tabcontrol/TabControl";
+import NavBar from "common/navbar/NavBar";
+import GoodsList from "../../components/content/goods/GoodsList";
 
 import { getHomeMultidata, getHomeData } from "network/home";
 export default {
@@ -97,6 +46,7 @@ export default {
     HomeRecommend,
     HomeFeature,
     TabControl,
+    GoodsList,
   },
   created() {
     // 获取multdata
