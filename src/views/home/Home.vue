@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2020-12-01 17:44:19
  * @LastEditors: qi-you
- * @LastEditTime: 2020-12-13 17:33:37
+ * @LastEditTime: 2020-12-14 17:14:54
  * @Descripttion: 
 -->
 <template>
@@ -70,15 +70,26 @@
 </template>
 <script>
 import NavBar from "common/navbar/NavBar";
+
 import HomeSwiper from "views/home/childcomps/HomeSwiper";
 import HomeRecommend from "views/home/childcomps/HomeRecommend";
 import HomeFeature from "views/home/childcomps/HomeFeature";
+
 import TabControl from "../../components/content/tabcontrol/TabControl";
-import { getHomeMultidata } from "network/home";
+
+import { getHomeMultidata, getHomeData } from "network/home";
 export default {
   name: "Home",
   data() {
-    return { banners: [], recommends: [] };
+    return {
+      banners: [],
+      recommends: [],
+      goods: {
+        pop: { page: 0, list: [] },
+        new: { page: 0, list: [] },
+        sell: { page: 0, list: [] },
+      },
+    };
   },
   components: {
     NavBar,
@@ -88,17 +99,32 @@ export default {
     TabControl,
   },
   created() {
-    getHomeMultidata()
-      .then((res) => {
-        // console.log("app", data);
-        this.banners = res.data.banner.list;
-        this.recommends = res.data.recommend.list;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // 获取multdata
+    this.getHomeMultidata();
+
+    // 获取主页流行。。。数据
+    this.getHomeData("pop");
+    this.getHomeData("new");
+    this.getHomeData("sell");
   },
-  methods: {},
+  methods: {
+    getHomeMultidata() {
+      getHomeMultidata()
+        .then((res) => {
+          // console.log("app", data);
+          this.banners = res.data.banner.list;
+          this.recommends = res.data.recommend.list;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getHomeData(type) {
+      getHomeData(type, (this.goods[type].page += 1)).then((res) =>
+        this.goods[type].list.push(...res.data.list)
+      );
+    },
+  },
 };
 </script>
 
