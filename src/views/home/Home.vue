@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2020-12-01 17:44:19
  * @LastEditors: qi-you
- * @LastEditTime: 2020-12-16 00:57:16
+ * @LastEditTime: 2020-12-16 01:55:41
  * @Descripttion: 
 -->
 <template>
@@ -10,7 +10,14 @@
     <nav-bar class="home-bar">
       <div slot="center" class="home-font">首页</div>
     </nav-bar>
-    <scroll class="wrapper" ref="scroll" :probe-type="3" @scroll="backTop">
+    <scroll
+      class="wrapper"
+      ref="scroll"
+      :probe-type="3"
+      @scroll="backTop"
+      :pull-up-load="true"
+      @pullingUp="loadMore"
+    >
       <home-swiper :banners="banners"></home-swiper>
       <home-recommend :recommend="recommends"></home-recommend>
       <home-feature></home-feature>
@@ -19,6 +26,7 @@
         :itemArray="['流行', '新款', '精选']"
       ></tab-control>
       <goods-list :goods="showGoods"></goods-list>
+      <h1 v-show="isp">正在加载</h1>
     </scroll>
     <back-top @click.native="backClick" v-show="isShowBackTop"></back-top>
   </div>
@@ -43,12 +51,13 @@ export default {
       banners: [],
       recommends: [],
       goods: {
-        pop: { page: 0, list: [] },
-        new: { page: 0, list: [] },
-        sell: { page: 0, list: [] },
+        pop: { page: 1, list: [] },
+        new: { page: 1, list: [] },
+        sell: { page: 1, list: [] },
       },
       currentType: "pop",
       isShowBackTop: false,
+      isp: false,
     };
   },
   computed: {
@@ -69,7 +78,6 @@ export default {
   created() {
     // 获取multdata
     this.getHomeMultidata();
-
     // 获取主页流行。。。数据
     this.getHomeData("pop");
     this.getHomeData("new");
@@ -93,13 +101,21 @@ export default {
           break;
       }
     },
+
     // 回到顶部
     backClick() {
       this.$refs.scroll.scrollTo(0, 0);
     },
+
     // 回到顶部
     backTop(position) {
       this.isShowBackTop = -position.y > 1000;
+    },
+
+    // 上拉刷新
+    loadMore() {
+      this.isp = true;
+      this.getHomeData(this.currentType);
     },
 
     // 网络请求
@@ -115,9 +131,10 @@ export default {
         });
     },
     getHomeData(type) {
-      getHomeData(type, (this.goods[type].page += 1)).then((res) =>
-        this.goods[type].list.push(...res.data.list)
-      );
+      getHomeData(type, this.goods[type].page++).then((res) => {
+        this.goods[type].list.push(...res.data.list);
+        this.$refs.scroll.finishPullUp();
+      });
     },
   },
 };
