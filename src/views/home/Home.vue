@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2020-12-01 17:44:19
  * @LastEditors: qi-you
- * @LastEditTime: 2020-12-14 18:50:52
+ * @LastEditTime: 2020-12-15 23:33:55
  * @Descripttion: 
 -->
 <template>
@@ -10,14 +10,16 @@
     <nav-bar class="home-bar">
       <div slot="center" class="home-font">首页</div>
     </nav-bar>
-    <home-swiper :banners="banners"></home-swiper>
-    <home-recommend :recommend="recommends"></home-recommend>
-    <home-feature></home-feature>
-    <tab-control
-      @tabClick="tabClick"
-      :itemArray="['流行', '新款', '精选']"
-    ></tab-control>
-    <goods-list :goods="showGoods"></goods-list>
+    <scroll class="wrapper">
+      <home-swiper :banners="banners"></home-swiper>
+      <home-recommend :recommend="recommends"></home-recommend>
+      <home-feature></home-feature>
+      <tab-control
+        @tabClick="tabClick"
+        :itemArray="['流行', '新款', '精选']"
+      ></tab-control>
+      <goods-list :goods="showGoods"></goods-list
+    ></scroll>
   </div>
 </template>
 <script>
@@ -28,6 +30,8 @@ import HomeFeature from "views/home/childcomps/HomeFeature";
 import TabControl from "../../components/content/tabcontrol/TabControl";
 import NavBar from "common/navbar/NavBar";
 import GoodsList from "../../components/content/goods/GoodsList";
+
+import Scroll from "../../components/common/scroll/Scroll";
 
 import { getHomeMultidata, getHomeData } from "network/home";
 export default {
@@ -41,13 +45,13 @@ export default {
         new: { page: 0, list: [] },
         sell: { page: 0, list: [] },
       },
-      currentType:"pop"
-    };  
+      currentType: "pop",
+    };
   },
-  computed:{
-    showGoods(){
-      return this.goods[this.currentType].list
-    }
+  computed: {
+    showGoods() {
+      return this.goods[this.currentType].list;
+    },
   },
   components: {
     NavBar,
@@ -56,6 +60,7 @@ export default {
     HomeFeature,
     TabControl,
     GoodsList,
+    Scroll,
   },
   created() {
     // 获取multdata
@@ -71,13 +76,13 @@ export default {
     tabClick(index) {
       switch (index) {
         case 0:
-          this.currentType = "pop"
+          this.currentType = "pop";
           break;
         case 1:
-          this.currentType = "new"
+          this.currentType = "new";
           break;
         case 2:
-          this.currentType = "sell"
+          this.currentType = "sell";
           break;
         default:
           break;
@@ -107,7 +112,9 @@ export default {
 
 <style scoped>
 .home {
+  position: relative;
   padding-top: 44px;
+  height: 100vh;
 }
 .home-bar {
   position: fixed;
@@ -119,6 +126,13 @@ export default {
 }
 .home-font {
   color: #fff;
+}
+.wrapper {
+  position: absolute;
+  top: 44px;
+  left: 0;
+  right: 0;
+  bottom: 49px;
 }
 </style>
 

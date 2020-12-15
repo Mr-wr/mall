@@ -1,0 +1,33 @@
+-------------------------------------创建
+npm install better-scroll@1.13.2 --save
+"better-scroll": "^1.13.2",
+wrapper中只能有一个元素/并且必须有高度
+import BScroll from "better-scroll";
+实例化
+let wrapper = this.$refs.wrapper;
+let scroll = new BScroll(wrapper);
+
+-----------------------监听事件
+要在实例化的时候添加第二个参数
+new BScroll(wrapper,{
+  // 是否实时监听滚轮位置
+  // 默认0不监听、1确定不监听
+  // 2：手指在滚动的过程中侦测，离开后不侦测
+  // 3：只要是滚动都侦测
+  probetype: 0,
+  // 默认是false在wrapper中监听不到事件
+  click:true,
+  // 监听上拉加载更多
+  pullUpLoad:true
+  });
+// 监听上拉加载更多(只会做一次)
+scroll.on([pullingUp/类型],()=>{
+  console.log("上拉")
+  // 获取到了数据之后必须要调用..告诉他已经做完了上拉加载更多
+  scroll.finishPullUp()
+})
+
+// 监听滚轮实时位置
+scroll.on([pullingUp/类型],(position)=>{
+  console.log("滚轮实时位置",position)
+})
