@@ -15,7 +15,7 @@ new BScroll(wrapper,{
   // 2：手指在滚动的过程中侦测，离开后不侦测
   // 3：只要是滚动都侦测
   probetype: 0,
-  // 默认是false在wrapper中监听不到事件
+  // 默认是false在类似于div元素中监听不到事件
   click:true,
   // 监听上拉加载更多
   pullUpLoad:true
@@ -31,3 +31,8 @@ scroll.on([pullingUp/类型],()=>{
 scroll.on([pullingUp/类型],(position)=>{
   console.log("滚轮实时位置",position)
 })
+
+
+
+--------------------跳到指定的位置
+scroll.scrollTo(x,y,time)

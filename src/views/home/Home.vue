@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2020-12-01 17:44:19
  * @LastEditors: qi-you
- * @LastEditTime: 2020-12-15 23:33:55
+ * @LastEditTime: 2020-12-16 00:57:16
  * @Descripttion: 
 -->
 <template>
@@ -10,7 +10,7 @@
     <nav-bar class="home-bar">
       <div slot="center" class="home-font">首页</div>
     </nav-bar>
-    <scroll class="wrapper">
+    <scroll class="wrapper" ref="scroll" :probe-type="3" @scroll="backTop">
       <home-swiper :banners="banners"></home-swiper>
       <home-recommend :recommend="recommends"></home-recommend>
       <home-feature></home-feature>
@@ -18,8 +18,9 @@
         @tabClick="tabClick"
         :itemArray="['流行', '新款', '精选']"
       ></tab-control>
-      <goods-list :goods="showGoods"></goods-list
-    ></scroll>
+      <goods-list :goods="showGoods"></goods-list>
+    </scroll>
+    <back-top @click.native="backClick" v-show="isShowBackTop"></back-top>
   </div>
 </template>
 <script>
@@ -28,9 +29,10 @@ import HomeRecommend from "views/home/childcomps/HomeRecommend";
 import HomeFeature from "views/home/childcomps/HomeFeature";
 
 import TabControl from "../../components/content/tabcontrol/TabControl";
-import NavBar from "common/navbar/NavBar";
 import GoodsList from "../../components/content/goods/GoodsList";
+import BackTop from "../../components/content/backtop/BackTop";
 
+import NavBar from "../../components/common/navbar/NavBar";
 import Scroll from "../../components/common/scroll/Scroll";
 
 import { getHomeMultidata, getHomeData } from "network/home";
@@ -46,6 +48,7 @@ export default {
         sell: { page: 0, list: [] },
       },
       currentType: "pop",
+      isShowBackTop: false,
     };
   },
   computed: {
@@ -61,6 +64,7 @@ export default {
     TabControl,
     GoodsList,
     Scroll,
+    BackTop,
   },
   created() {
     // 获取multdata
@@ -73,6 +77,7 @@ export default {
   },
   methods: {
     // 事件监听
+    // 显示不同的数据
     tabClick(index) {
       switch (index) {
         case 0:
@@ -87,6 +92,14 @@ export default {
         default:
           break;
       }
+    },
+    // 回到顶部
+    backClick() {
+      this.$refs.scroll.scrollTo(0, 0);
+    },
+    // 回到顶部
+    backTop(position) {
+      this.isShowBackTop = -position.y > 1000;
     },
 
     // 网络请求
