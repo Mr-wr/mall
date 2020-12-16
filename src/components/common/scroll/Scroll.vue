@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2020-12-15 22:47:12
  * @LastEditors: qi-you
- * @LastEditTime: 2020-12-16 10:51:16
+ * @LastEditTime: 2020-12-16 11:22:44
  * @Descripttion: 
 -->
 <template>
@@ -32,27 +32,30 @@ export default {
     };
   },
   mounted() {
-    this.scroll = new Bscroll(this.$refs.wrapper, {
-      click: true,
-      probeType: this.probeType,
-      pullUpLoad: this.pullUpLoad,
-    });
-    this.scroll.on("scroll", (position) => {
-      this.$emit("scroll", position);
-    });
-    this.scroll.on("pullingUp", () => {
-      this.$emit("pullingUp");
-    });
+    if (!this.scroll)
+      this.scroll = new Bscroll(this.$refs.wrapper, {
+        click: true,
+        probeType: this.probeType,
+        pullUpLoad: this.pullUpLoad,
+      });
+    this.scroll &&
+      this.scroll.on("scroll", (position) => {
+        this.$emit("scroll", position);
+      });
+    this.scroll &&
+      this.scroll.on("pullingUp", () => {
+        this.$emit("pullingUp");
+      });
   },
   methods: {
     scrollTo(x, y, time = 300) {
-      this.scroll.scrollTo(x, y, time);
+      this.scroll && this.scroll.scrollTo(x, y, time);
     },
     finishPullUp() {
-      this.scroll.finishPullUp();
+      this.scroll && this.scroll.finishPullUp();
     },
     refresh() {
-      this.scroll.refresh();
+      this.scroll && this.scroll.refresh();
     },
   },
 };
