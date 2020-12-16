@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2020-12-14 17:24:48
  * @LastEditors: qi-you
- * @LastEditTime: 2020-12-14 18:49:59
+ * @LastEditTime: 2020-12-16 11:00:27
  * @Descripttion: 
 -->
 <template>
@@ -10,7 +10,7 @@
     <goods-list-item
       :goods-item="item"
       v-for="item in goods"
-      :key="item.show.img"
+      :key="item.acm"
     ></goods-list-item>
   </div>
 </template>
