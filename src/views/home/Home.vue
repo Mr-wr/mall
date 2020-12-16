@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2020-12-01 17:44:19
  * @LastEditors: qi-you
- * @LastEditTime: 2020-12-16 11:30:00
+ * @LastEditTime: 2020-12-16 12:03:38
  * @Descripttion: 
 -->
 <template>
@@ -101,23 +101,29 @@ export default {
           break;
       }
     },
-
     // 回到顶部
     backClick() {
       this.$refs.scroll.scrollTo(0, 0);
     },
-
     // 回到顶部
     backTop(position) {
       this.isShowBackTop = -position.y > 1000;
     },
-
     // 上拉刷新
     loadMore() {
       this.isp = true;
       this.getHomeData(this.currentType);
     },
-
+    // 封装放抖动
+    debounce(func, delay) {
+      let time = null;
+      return (...arg) => {
+        time && clearTimeout(time);
+        time = setTimeout(() => {
+          func.apply(this, arg);
+        }, delay);
+      };
+    },
     // 网络请求
     getHomeMultidata() {
       getHomeMultidata()
@@ -139,8 +145,9 @@ export default {
   },
   mounted() {
     // 图片加载
+    const refresh = this.debounce(this.$refs.scroll.refresh);
     this.$bus.$on("itemImageLoad", () => {
-      this.$refs.scroll.refresh();
+      refresh();
     });
   },
 };

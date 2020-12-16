@@ -3,6 +3,19 @@
 const letters = [1,2,3,4,5,6,7]
 console.log(...letters)//-> 1 2 3 4 5 6 7
 
+------------------放抖动
+// 封装放抖动
+    debounce(func, delay) {
+      let time = null;
+      return (...arg) => {
+        time && clearTimeout(time);
+        time = setTimeout(() => {
+          func.apply(this, arg);
+        }, delay);
+      };
+    },
+
+
 
 -----------------------------事件总线
 发射事件
