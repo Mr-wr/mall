@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2020-12-13 13:45:32
  * @LastEditors: qi-you
- * @LastEditTime: 2020-12-14 18:22:29
+ * @LastEditTime: 2020-12-16 19:35:27
  * @Descripttion: 
 -->
 <template>
@@ -48,8 +48,8 @@ export default {
 <style scoped>
 .tab-control {
   display: flex;
-  position: sticky;
-  top: 44px;
+  /* position: sticky;
+  top: 44px; */
   background-color:#fff;
   text-align: center;
   font-size: 14px;

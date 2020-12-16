@@ -2,14 +2,14 @@
  * @Author: qi-you
  * @Date: 2020-12-11 11:32:36
  * @LastEditors: qi-you
- * @LastEditTime: 2020-12-14 19:07:30
+ * @LastEditTime: 2020-12-16 20:20:01
  * @Descripttion: 
 -->
 <template>
   <swiper>
-    <swiper-item v-for="item in banners" :key="item.image">
+    <swiper-item v-for="item in banners" :key="item.image" >
       <a href="#">
-        <img :src="item.image" alt="" />
+        <img :src="item.image" alt="" @load="imgLoad" />
       </a>
     </swiper-item>
   </swiper>
@@ -23,12 +23,21 @@ export default {
     banners: null,
   },
   data() {
-    return {  };
+    return {
+      isImgload: true,
+    };
   },
   components: { Swiper, SwiperItem },
   computed: {},
-  
-  methods: {},
+
+  methods: {
+    imgLoad() {
+      if (this.isImgload) {
+        this.isImgload = false;
+        this.$emit("imgLoad");
+      }
+    },
+  },
 };
 </script>
 

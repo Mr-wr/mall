@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2020-12-01 17:44:19
  * @LastEditors: qi-you
- * @LastEditTime: 2020-12-16 14:44:03
+ * @LastEditTime: 2020-12-16 20:22:08
  * @Descripttion: 
 -->
 <template>
@@ -10,6 +10,13 @@
     <nav-bar class="home-bar">
       <div slot="center" class="home-font">首页</div>
     </nav-bar>
+    <tab-control
+      class="tab1"
+      ref="tab1"
+      @tabClick="tabClick"
+      :itemArray="['流行', '新款', '精选']"
+      v-show="isTab1Show"
+    ></tab-control>
     <scroll
       class="wrapper"
       ref="scroll"
@@ -18,10 +25,11 @@
       :pull-up-load="true"
       @pullingUp="loadMore"
     >
-      <home-swiper :banners="banners"></home-swiper>
+      <home-swiper :banners="banners" @imgLoad="imgLoad"></home-swiper>
       <home-recommend :recommend="recommends"></home-recommend>
       <home-feature></home-feature>
       <tab-control
+        ref="tab2"
         @tabClick="tabClick"
         :itemArray="['流行', '新款', '精选']"
       ></tab-control>
@@ -59,6 +67,9 @@ export default {
       currentType: "pop",
       isShowBackTop: false,
       isp: false,
+      isFixed: false,
+      scrollCurrentIndex: 0,
+      isTab1Show: false,
     };
   },
   computed: {
@@ -88,6 +99,8 @@ export default {
     // 事件监听
     // 显示不同的数据
     tabClick(index) {
+      this.$refs.tab1.currentIndex = index;
+      this.$refs.tab2.currentIndex = index;
       switch (index) {
         case 0:
           this.currentType = "pop";
@@ -106,14 +119,18 @@ export default {
     backClick() {
       this.$refs.scroll.scrollTo(0, 0);
     },
-    // 回到顶部
+    // 监听滚轮，回到顶部
     backTop(position) {
       this.isShowBackTop = -position.y > 1000;
+      this.isTab1Show = -position.y > this.scrollCurrentIndex;
     },
     // 上拉刷新
     loadMore() {
       this.isp = true;
       this.getHomeData(this.currentType);
+    },
+    imgLoad() {
+      this.scrollCurrentIndex = this.$refs.tab2.$el.offsetTop;
     },
 
     // 网络请求
@@ -168,6 +185,10 @@ export default {
   left: 0;
   right: 0;
   bottom: 49px;
+}
+.tab1 {
+  position: relative;
+  z-index: 2;
 }
 </style>
 
