@@ -1,0 +1,16 @@
+-----------------------首页better-scroll的bug拖不动
+问题：在首页中有的时候拖不动要等会才能拖动
+
+原因：scroll计算可拖动高度时候，因为还有图片没有加载出来，
+所以算的可拖动距离变小，当图片加载成功后图片会撑大可拖动内容就导致了不能拖动
+
+
+--------------------有的时候还没有和dom绑定的时候应该先判断是否有值
+ if (!this.scroll)
+      this.scroll = new Bscroll(this.$refs.wrapper, {
+        click: true,
+        probeType: this.probeType,
+        pullUpLoad: this.pullUpLoad,
+      });
+
+
