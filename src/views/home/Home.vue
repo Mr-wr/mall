@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2020-12-01 17:44:19
  * @LastEditors: qi-you
- * @LastEditTime: 2020-12-16 01:55:41
+ * @LastEditTime: 2020-12-16 11:03:06
  * @Descripttion: 
 -->
 <template>
@@ -82,6 +82,11 @@ export default {
     this.getHomeData("pop");
     this.getHomeData("new");
     this.getHomeData("sell");
+
+    // 图片加载
+    this.$bus.$on("itemImageLoad", () => {
+      this.$refs.scroll.refresh();
+    });
   },
   methods: {
     // 事件监听

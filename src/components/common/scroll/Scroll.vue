@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2020-12-15 22:47:12
  * @LastEditors: qi-you
- * @LastEditTime: 2020-12-16 01:45:58
+ * @LastEditTime: 2020-12-16 10:51:16
  * @Descripttion: 
 -->
 <template>
@@ -50,6 +50,9 @@ export default {
     },
     finishPullUp() {
       this.scroll.finishPullUp();
+    },
+    refresh() {
+      this.scroll.refresh();
     },
   },
 };
