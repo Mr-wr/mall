@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2020-12-15 22:47:12
  * @LastEditors: qi-you
- * @LastEditTime: 2020-12-16 11:54:44
+ * @LastEditTime: 2020-12-16 21:09:28
  * @Descripttion: 
 -->
 <template>
@@ -56,6 +56,9 @@ export default {
     },
     refresh() {
       this.scroll && this.scroll.refresh();
+    },
+    getY() {
+      return this.scroll ? this.scroll.y : 0;
     },
   },
 };

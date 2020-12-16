@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2020-12-01 17:44:19
  * @LastEditors: qi-you
- * @LastEditTime: 2020-12-16 20:22:08
+ * @LastEditTime: 2020-12-16 21:13:24
  * @Descripttion: 
 -->
 <template>
@@ -70,6 +70,7 @@ export default {
       isFixed: false,
       scrollCurrentIndex: 0,
       isTab1Show: false,
+      saveY: 0,
     };
   },
   computed: {
@@ -158,6 +159,12 @@ export default {
     this.$bus.$on("itemImageLoad", () => {
       refresh();
     });
+  },
+  activated() {
+    this.$refs.scroll.scrollTo(0, this.saveY, 0);
+  },
+  deactivated() {
+    this.saveY = this.$refs.scroll.getY();
   },
 };
 </script>
