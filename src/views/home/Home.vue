@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2020-12-01 17:44:19
  * @LastEditors: qi-you
- * @LastEditTime: 2020-12-16 12:03:38
+ * @LastEditTime: 2020-12-16 14:44:03
  * @Descripttion: 
 -->
 <template>
@@ -44,6 +44,7 @@ import NavBar from "../../components/common/navbar/NavBar";
 import Scroll from "../../components/common/scroll/Scroll";
 
 import { getHomeMultidata, getHomeData } from "network/home";
+import { debounce } from "../../common/utils";
 export default {
   name: "Home",
   data() {
@@ -114,16 +115,7 @@ export default {
       this.isp = true;
       this.getHomeData(this.currentType);
     },
-    // 封装放抖动
-    debounce(func, delay) {
-      let time = null;
-      return (...arg) => {
-        time && clearTimeout(time);
-        time = setTimeout(() => {
-          func.apply(this, arg);
-        }, delay);
-      };
-    },
+
     // 网络请求
     getHomeMultidata() {
       getHomeMultidata()
@@ -145,7 +137,7 @@ export default {
   },
   mounted() {
     // 图片加载
-    const refresh = this.debounce(this.$refs.scroll.refresh);
+    const refresh = debounce(this.$refs.scroll.refresh);
     this.$bus.$on("itemImageLoad", () => {
       refresh();
     });
