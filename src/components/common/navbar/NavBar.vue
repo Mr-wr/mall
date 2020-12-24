@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2020-12-10 19:52:31
  * @LastEditors: qi-you
- * @LastEditTime: 2020-12-10 20:48:07
+ * @LastEditTime: 2020-12-24 11:13:50
  * @Descripttion: 
 -->
 <template>
@@ -30,7 +30,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .nav-bar {
   display: flex;
   justify-content: space-between;

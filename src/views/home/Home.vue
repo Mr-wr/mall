@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2020-12-01 17:44:19
  * @LastEditors: qi-you
- * @LastEditTime: 2020-12-16 21:13:24
+ * @LastEditTime: 2020-12-23 15:18:04
  * @Descripttion: 
 -->
 <template>
@@ -160,8 +160,10 @@ export default {
       refresh();
     });
   },
+  // 保存home历史滚轮位置
   activated() {
     this.$refs.scroll.scrollTo(0, this.saveY, 0);
+    this.$refs.scroll.refresh();
   },
   deactivated() {
     this.saveY = this.$refs.scroll.getY();
