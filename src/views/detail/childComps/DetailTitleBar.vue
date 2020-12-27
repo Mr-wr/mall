@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2020-12-24 16:57:29
  * @LastEditors: qi-you
- * @LastEditTime: 2020-12-24 17:03:16
+ * @LastEditTime: 2020-12-27 11:28:44
  * @Descripttion: 
 -->
 <template>
@@ -36,6 +36,7 @@ export default {
     };
   },
   methods: {
+    // 点击事件
     backClick() {
       this.$router.go(-1);
     },
@@ -44,7 +45,6 @@ export default {
     },
   },
   deactivated() {
-    this.currentIndex = 0;
   },
 };
 </script>
