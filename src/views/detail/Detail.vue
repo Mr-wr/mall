@@ -1,10 +1,10 @@
 <template>
   <div class="detail">
-    <scroll>
+    <scroll class="detail-scroll" ref="detail-scroll">
       <detail-title-bar />
       <child-swiper :topImages="topImages"></child-swiper>
+      <child-base-info :goods="goods"></child-base-info>
     </scroll>
-    <child-base-info></child-base-info>
   </div>
 </template>
 <script>
@@ -14,7 +14,7 @@ import childBaseInfo from "./childComps/childBaseInfo";
 
 import Scroll from "common/scroll/Scroll";
 
-import { getDetail } from "network/detail";
+import { getDetail, Goods } from "network/detail";
 export default {
   name: "Detail",
   components: {
@@ -29,14 +29,23 @@ export default {
         type: String,
       },
       topImages: [],
+      goods: {
+        type: Object,
+        default() {
+          return {};
+        },
+      },
     };
   },
   methods: {},
   created() {
     this.iid = this.$route.params.iid;
     getDetail(this.iid).then((res) => {
-      this.topImages = res.result.itemInfo.topImages;
-      // console.log(res);
+      const data = res;
+      this.topImages = data.result.itemInfo.topImages;
+      // console.log(data);
+      this.goods = new Goods(data.result.itemInfo, data.result.columns, data.result.shopInfo.services);
+      // console.log(this.goods);
     });
   },
   mounted() {},
@@ -44,4 +53,7 @@ export default {
 </script>
 
 <style scoped>
+.detail {
+  background-color: #f0f0f0;
+}
 </style>
