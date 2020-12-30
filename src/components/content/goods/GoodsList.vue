@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2020-12-14 17:24:48
  * @LastEditors: qi-you
- * @LastEditTime: 2020-12-16 11:00:27
+ * @LastEditTime: 2020-12-30 14:44:08
  * @Descripttion: 
 -->
 <template>
@@ -38,5 +38,6 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  background-color: #f0f0f0;
 }
 </style>
