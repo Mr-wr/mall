@@ -2,13 +2,14 @@
  * @Author: qi-you
  * @Date: 2020-12-27 11:30:55
  * @LastEditors: qi-you
- * @LastEditTime: 2020-12-28 17:18:15
+ * @LastEditTime: 2020-12-29 18:11:53
  * @FilePath: \spuer_mall\src\views\detail\childComps\childBaseInfo.vue
  * @Description: 
 -->
 <template>
   <div class="child-base-info">
-    <div class="info-content">
+    <wrapper class="info-content">
+      <!-- <div class="info-content"> -->
       <div class="discount">卖家促销{{ goods.discountDesc }}</div>
       <div class="price">
         <i class="new-price">
@@ -28,12 +29,17 @@
           {{ item }}
         </span>
       </div>
-    </div>
+    </wrapper>
+    <!-- </div> -->
   </div>
 </template>
 
 <script>
+import Wrapper from "content/wrapper/Wrapper";
 export default {
+  components: {
+    Wrapper,
+  },
   props: {
     goods: {
       type: Object,
@@ -46,7 +52,7 @@ export default {
 </script>
 
 <style scoped>
-.child-base-info {
+/* .child-base-info {
   display: flex;
   justify-content: center;
 }
@@ -56,7 +62,7 @@ export default {
   width: 95%;
   border-radius: 10px;
   background-color: #fff;
-}
+} */
 .info-content div {
   margin-top: 5px;
 }
