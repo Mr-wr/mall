@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2020-12-24 16:57:29
  * @LastEditors: qi-you
- * @LastEditTime: 2020-12-27 11:28:44
+ * @LastEditTime: 2021-01-03 04:55:05
  * @Descripttion: 
 -->
 <template>
@@ -42,10 +42,11 @@ export default {
     },
     titleClick(index) {
       this.currentIndex = index;
+      // 判断那一个被点击
+      this.$emit("titleClick", this.currentIndex);
     },
   },
-  deactivated() {
-  },
+  deactivated() {},
 };
 </script>
 

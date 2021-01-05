@@ -1,13 +1,39 @@
 <template>
   <div class="detail">
-    <detail-title-bar class="title-bar" />
-    <scroll class="detail-scroll" ref="scroll">
+    <detail-title-bar
+      ref="titleBar"
+      @titleClick="titleClick"
+      class="title-bar"
+    />
+    <scroll
+      :probe-type="3"
+      @scroll="scrollRealTime"
+      class="detail-scroll"
+      ref="scroll"
+    >
+      <!-- 顶部轮播图 -->
       <child-swiper :topImages="topImages"></child-swiper>
+      <!-- 商品基本信息展示 -->
       <child-base-info :goods="goods"></child-base-info>
-      <child-shop-info :shop="shop" :detail-info="detailInfo"></child-shop-info>
+      <!-- 店铺信息 -->
+      <child-shop-info :shop="shop"></child-shop-info>
+      <!-- 商品评论 -->
+      <child-comment
+        v-if="Object.keys(commentInfo).length !== 0"
+        :comment-info="commentInfo"
+        ref="comment"
+      >
+      </child-comment>
+      <div class="detail-font">宝贝详情</div>
+      <!-- 宝贝详情 -->
       <detail-info :detail-info="detailInfo" @imgLoad="imgLoad"></detail-info>
+      <!-- 商家推荐 -->
+      <child-shop-recommend
+        ref="recommend"
+        :recommends="recommends"
+      ></child-shop-recommend>
     </scroll>
-    <shop-tab-bar></shop-tab-bar>
+    <!-- <shop-tab-bar></shop-tab-bar> -->
   </div>
 </template>
 <script>
@@ -16,12 +42,14 @@ import ChildSwiper from "./childComps/childSwiper";
 import childBaseInfo from "./childComps/childBaseInfo";
 import childShopInfo from "./childComps/childShopInfo";
 import DetailInfo from "./childComps/DetailInfo";
+import childComment from "./childComps/childComment";
+import childShopRecommend from "./childComps/childShopRecommend";
 
 import Scroll from "common/scroll/Scroll";
 
 import ShopTabBar from "content/shopTabBar/ShopTabBar";
 
-import { getDetail, Goods, Shop } from "network/detail";
+import { getDetail, Goods, Shop, getRecommends } from "network/detail";
 export default {
   name: "Detail",
   components: {
@@ -32,6 +60,8 @@ export default {
     childShopInfo,
     ShopTabBar,
     DetailInfo,
+    childComment,
+    childShopRecommend,
   },
   data() {
     return {
@@ -58,14 +88,40 @@ export default {
         },
       },
       shopImgtime: null,
+      commentInfo: {},
+      recommends: [],
+      recommendTitleY: [0, 300],
     };
   },
   methods: {
+    // 图片加载完成后
     imgLoad() {
       this.shopImgtime && clearTimeout(this.shopImgtime);
       this.shopImgtime = setTimeout(() => {
         this.$refs.scroll.refresh();
+        // 获取detail-info和顶部的距离
+        this.recommendTitleY.push(this.$refs.comment.$el.offsetTop);
+        this.recommendTitleY.push(this.$refs.recommend.$el.offsetTop);
       }, 1000);
+    },
+
+    // detailtitle被点击
+    titleClick(index) {
+      // console.log(index, "被点击");
+      this.$refs.scroll.scrollTo(0, -(this.recommendTitleY[index] - 45));
+    },
+
+    // 监听滚轮
+    scrollRealTime(position) {
+      // 滚轮对应实时位置
+      if (position.y >= this.recommendTitleY[0])
+        this.$refs.titleBar.currentIndex = 0;
+      if (-position.y >= this.recommendTitleY[1] - 45)
+        this.$refs.titleBar.currentIndex = 1;
+      if (-position.y >= this.recommendTitleY[2] - 45)
+        this.$refs.titleBar.currentIndex = 2;
+      if (-position.y >= this.recommendTitleY[3] - 45)
+        this.$refs.titleBar.currentIndex = 3;
     },
   },
   created() {
@@ -94,6 +150,16 @@ export default {
 
       this.detailInfo = data.detailInfo;
       // console.log(this.detailInfo);
+
+      // 取出评论信息
+      if (data.rate.list[0]) {
+        this.commentInfo = data.rate.list[0];
+      }
+    });
+
+    // 3、获取推荐数据
+    getRecommends(this.iid).then((res) => {
+      this.recommends = res.data.list;
     });
   },
   mounted() {},
@@ -115,5 +181,35 @@ export default {
 }
 .detail-scroll {
   height: calc(100% - 94px);
+}
+
+/* 文字两边横线 */
+.detail-font {
+  padding: 10px 0;
+  width: 200px;
+  font-size: 16px;
+  margin: 0 auto;
+  position: relative;
+  text-align: center;
+}
+
+.detail-font:before {
+  content: "";
+  border-top: 1px solid #ccc;
+  display: block;
+  position: absolute;
+  width: 60px;
+  top: 20px;
+  left: 0;
+}
+
+.detail-font:after {
+  content: "";
+  border-top: 1px solid #ccc;
+  display: block;
+  position: absolute;
+  width: 60px;
+  top: 20px;
+  right: 0;
 }
 </style>

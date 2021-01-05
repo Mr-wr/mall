@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2020-12-27 11:30:55
  * @LastEditors: qi-you
- * @LastEditTime: 2020-12-29 18:11:53
+ * @LastEditTime: 2020-12-30 15:08:32
  * @FilePath: \spuer_mall\src\views\detail\childComps\childBaseInfo.vue
  * @Description: 
 -->
@@ -85,5 +85,6 @@ export default {
   display: flex;
   justify-content: space-between;
   font-size: 16px;
+  color: #666;
 }
 </style>

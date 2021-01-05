@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2020-12-01 17:44:19
  * @LastEditors: qi-you
- * @LastEditTime: 2020-12-29 12:54:52
+ * @LastEditTime: 2021-01-05 08:29:37
  * @Descripttion: 
 -->
 <template>
@@ -160,15 +160,18 @@ export default {
       refresh();
     });
   },
-  
+
   activated() {
     // 保存home历史滚轮位置
     // 回到home界面是要先刷新不然会有概率不能保存历史位置
     this.$refs.scroll.refresh();
     this.$refs.scroll.scrollTo(0, this.saveY, 0);
   },
+  // 离开界面
   deactivated() {
+    // 离开前回去位置
     this.saveY = this.$refs.scroll.getY();
+    // 取消全局的监听
   },
 };
 </script>

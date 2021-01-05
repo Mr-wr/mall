@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2020-12-28 22:02:28
  * @LastEditors: qi-you
- * @LastEditTime: 2020-12-30 10:21:51
+ * @LastEditTime: 2021-01-03 03:14:16
  * @FilePath: \spuer_mall\src\views\detail\childComps\childShopInfo.vue
  * @Description: 
 -->
@@ -39,24 +39,20 @@
         <button>进店逛逛</button>
         <button>全部宝贝</button>
       </div>
-      <!-- 商家推荐 -->
-      <div class="recommended">
-        <div class="fr">
-          <a href="#">查看全部<img src="~img/common/next.svg" alt="" /></a>
-        </div>
-        <h4>店铺推荐</h4>
-      </div>
     </wrapper>
-    <div class="detail-font">宝贝详情</div>
+
     <!-- </div> -->
   </div>
 </template>
 
 <script>
 import Wrapper from "content/wrapper/Wrapper";
+
+import GoodsList from "content/goods/GoodsList";
 export default {
   components: {
     Wrapper,
+    GoodsList,
   },
   props: {
     shop: {
@@ -78,7 +74,6 @@ export default {
       return price.toFixed(1);
     },
   },
-  mounted() {},
 };
 </script>
 
@@ -132,35 +127,5 @@ export default {
 .recommended .fr img {
   width: 18px;
   vertical-align: sub;
-}
-
-/* 文字两边横线 */
-.detail-font {
-  padding: 10px 0;
-  width: 200px;
-  font-size: 16px;
-  margin: 0 auto;
-  position: relative;
-  text-align: center;
-}
-
-.detail-font:before {
-  content: "";
-  border-top: 1px solid #ccc;
-  display: block;
-  position: absolute;
-  width: 60px;
-  top: 20px;
-  left: 0;
-}
-
-.detail-font:after {
-  content: "";
-  border-top: 1px solid #ccc;
-  display: block;
-  position: absolute;
-  width: 60px;
-  top: 20px;
-  right: 0;
 }
 </style>

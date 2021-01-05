@@ -8,6 +8,7 @@ const Cart = () => import("views/cart/Cart");
 const Category = () => import("views/category/Category");
 const Profile = () => import("views/profile/Profile");
 const Detail = () => import("views/detail/Detail");
+const Store = () => import("views/store/Store");
 const routes = [
   {
     path: "",
@@ -47,6 +48,10 @@ const routes = [
       title: "商品详情"
     },
     component: Detail
+  },
+  {
+    path: "/store",
+    component: Store
   }
 ];
 

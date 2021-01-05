@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2020-12-29 18:05:16
  * @LastEditors: qi-you
- * @LastEditTime: 2020-12-30 08:36:41
+ * @LastEditTime: 2020-12-31 09:18:54
  * @FilePath: \spuer_mall\src\components\content\wrapper\Wrapper.vue
  * @Description: 
 -->
@@ -20,12 +20,12 @@ export default {};
 
 <style scoped>
 .wrapper {
+  margin-top: 10px;
   display: flex;
   justify-content: center;
   color: #000;
 }
 .wrapper > .content {
-  margin-top: 10px;
   padding: 10px;
   width: 95%;
   border-radius: 10px;

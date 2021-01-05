@@ -27,6 +27,40 @@ this.$bus.$emit
 接收
 this.$bus.$on
 
+
+
+
+
+----------------------------mixin混入
+// 是一个对象
+// 
+export const testMixin={
+  mounted(){
+    console.log("这是混入的打印")
+  }
+}
+// 再app中
+// 是一个数组可以放入多个
+mixins:[testMixin]
+
+-----------------------$nextTick
+再app中 
+mounted(){
+  this.$nextTick({
+    // 这里的内容会再vue渲染完成后执行
+  })
+}
+
+
+
+
+
+
+
+
+
+
+
 1、项目目录
 common
 一些公共的方法、变量、js文件

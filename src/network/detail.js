@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2020-12-24 17:07:30
  * @LastEditors: qi-you
- * @LastEditTime: 2020-12-28 21:57:08
+ * @LastEditTime: 2021-01-03 02:53:37
  * @Descripttion:
  */
 import { request } from "./request";
@@ -12,6 +12,11 @@ export function getDetail(iid) {
     params: {
       iid
     }
+  });
+}
+export function getRecommends() {
+  return request({
+    url: "/recommend"
   });
 }
 export class Goods {
