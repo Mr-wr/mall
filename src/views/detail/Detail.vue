@@ -49,8 +49,8 @@ import childShopRecommend from "./childComps/childShopRecommend";
 import DetailBottomBar from "./childComps/DetailBottomBar";
 
 import Scroll from "common/scroll/Scroll";
+import { backtopMixin } from "../../common/mixin";
 
-import BackTop from "content/backtop/BackTop";
 import ShopTabBar from "content/shopTabBar/ShopTabBar";
 
 import { getDetail, Goods, Shop, getRecommends } from "network/detail";
@@ -67,8 +67,8 @@ export default {
     childComment,
     childShopRecommend,
     DetailBottomBar,
-    BackTop,
   },
+  mixins: [backtopMixin],
   data() {
     return {
       iid: {
@@ -97,18 +97,14 @@ export default {
       commentInfo: {},
       recommends: [],
       recommendTitleY: [0, 300],
-      isShowBackTop: false,
+
       currentIndex: 0,
     };
   },
   methods: {
     // 事件监听
-    // 回到顶部
-    scrollToTop() {
-      this.$refs.scroll.scrollTo(0, 0);
-    },
 
-    // 图片加载完成后
+    // 详情图片加载完成后
     imgLoad() {
       this.shopImgtime && clearTimeout(this.shopImgtime);
       this.shopImgtime = setTimeout(() => {
@@ -116,7 +112,7 @@ export default {
         // 获取detail-info和顶部的距离
         this.recommendTitleY.push(this.$refs.comment.$el.offsetTop);
         this.recommendTitleY.push(this.$refs.recommend.$el.offsetTop);
-        this.recommendTitleY.push(1000000);
+        this.recommendTitleY.push(Number.MAX_VALUE);
       }, 1000);
     },
 
