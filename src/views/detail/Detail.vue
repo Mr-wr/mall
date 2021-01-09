@@ -32,8 +32,9 @@
         ref="recommend"
         :recommends="recommends"
       ></child-shop-recommend>
-    </scroll>
+    </scroll> 
     <!-- <shop-tab-bar></shop-tab-bar> -->
+    <detail-bottom-bar></detail-bottom-bar>
   </div>
 </template>
 <script>
@@ -44,6 +45,7 @@ import childShopInfo from "./childComps/childShopInfo";
 import DetailInfo from "./childComps/DetailInfo";
 import childComment from "./childComps/childComment";
 import childShopRecommend from "./childComps/childShopRecommend";
+import DetailBottomBar from "./childComps/DetailBottomBar";
 
 import Scroll from "common/scroll/Scroll";
 
@@ -62,6 +64,7 @@ export default {
     DetailInfo,
     childComment,
     childShopRecommend,
+    DetailBottomBar,
   },
   data() {
     return {
@@ -122,6 +125,8 @@ export default {
         this.$refs.titleBar.currentIndex = 2;
       if (-position.y >= this.recommendTitleY[3] - 45)
         this.$refs.titleBar.currentIndex = 3;
+      // 滚动频繁问题
+      console.log("----");
     },
   },
   created() {
