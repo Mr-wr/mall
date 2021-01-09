@@ -32,7 +32,8 @@
         ref="recommend"
         :recommends="recommends"
       ></child-shop-recommend>
-    </scroll> 
+    </scroll>
+    <back-top @click.native="scrollToTop" v-show="isShowBackTop"></back-top>
     <!-- <shop-tab-bar></shop-tab-bar> -->
     <detail-bottom-bar></detail-bottom-bar>
   </div>
@@ -49,6 +50,7 @@ import DetailBottomBar from "./childComps/DetailBottomBar";
 
 import Scroll from "common/scroll/Scroll";
 
+import BackTop from "content/backtop/BackTop";
 import ShopTabBar from "content/shopTabBar/ShopTabBar";
 
 import { getDetail, Goods, Shop, getRecommends } from "network/detail";
@@ -65,6 +67,7 @@ export default {
     childComment,
     childShopRecommend,
     DetailBottomBar,
+    BackTop,
   },
   data() {
     return {
@@ -94,9 +97,17 @@ export default {
       commentInfo: {},
       recommends: [],
       recommendTitleY: [0, 300],
+      isShowBackTop: false,
+      currentIndex: 0,
     };
   },
   methods: {
+    // 事件监听
+    // 回到顶部
+    scrollToTop() {
+      this.$refs.scroll.scrollTo(0, 0);
+    },
+
     // 图片加载完成后
     imgLoad() {
       this.shopImgtime && clearTimeout(this.shopImgtime);
@@ -105,6 +116,7 @@ export default {
         // 获取detail-info和顶部的距离
         this.recommendTitleY.push(this.$refs.comment.$el.offsetTop);
         this.recommendTitleY.push(this.$refs.recommend.$el.offsetTop);
+        this.recommendTitleY.push(1000000);
       }, 1000);
     },
 
@@ -116,17 +128,33 @@ export default {
 
     // 监听滚轮
     scrollRealTime(position) {
-      // 滚轮对应实时位置
-      if (position.y >= this.recommendTitleY[0])
-        this.$refs.titleBar.currentIndex = 0;
-      if (-position.y >= this.recommendTitleY[1] - 45)
-        this.$refs.titleBar.currentIndex = 1;
-      if (-position.y >= this.recommendTitleY[2] - 45)
-        this.$refs.titleBar.currentIndex = 2;
-      if (-position.y >= this.recommendTitleY[3] - 45)
-        this.$refs.titleBar.currentIndex = 3;
+      // 滚轮对应titleBar实时位置
+      // 解决滚动获取频繁的问题
+      for (let index = 0; index < this.recommendTitleY.length; index++) {
+        if (
+          this.currentIndex !== index &&
+          -position.y >= this.recommendTitleY[index] - 45 &&
+          -position.y <= this.recommendTitleY[index + 1] - 45
+        ) {
+          console.log("==");
+          this.$refs.titleBar.currentIndex = index;
+          this.currentIndex = index;
+        }
+      }
       // 滚动频繁问题
-      console.log("----");
+      // if (this.currentIndex !== this.$refs.titleBar.currentIndex) {
+      //   console.log("====");
+      //   if (position.y >= this.recommendTitleY[0])
+      //     this.$refs.titleBar.currentIndex = 0;
+      //   if (-position.y >= this.recommendTitleY[1] - 45)
+      //     this.$refs.titleBar.currentIndex = 1;
+      //   if (-position.y >= this.recommendTitleY[2] - 45)
+      //     this.$refs.titleBar.currentIndex = 2;
+      //   if (-position.y >= this.recommendTitleY[3] - 45)
+      //     this.$refs.titleBar.currentIndex = 3;
+      // }
+      // console.log("----");
+      this.isShowBackTop = -position.y > 1000;
     },
   },
   created() {
