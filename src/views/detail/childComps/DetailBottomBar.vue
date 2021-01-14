@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2021-01-09 16:31:27
  * @LastEditors: qi-you
- * @LastEditTime: 2021-01-09 16:57:11
+ * @LastEditTime: 2021-01-14 09:52:17
  * @FilePath: \spuer_mall\src\views\detail\childComps\DetailBottomBar.vue
  * @Description: 
 -->
@@ -30,13 +30,24 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    addToCart() {
+      this.$emit("addCart");
+    }
+  }
+};
 </script>
 
 <style scoped>
 .bottom-bar {
   display: flex;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
   justify-content: center;
   background-color: red;
+  z-index: 9;
 }
 </style>

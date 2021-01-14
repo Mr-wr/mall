@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2020-12-28 22:02:28
  * @LastEditors: qi-you
- * @LastEditTime: 2021-01-03 03:14:16
+ * @LastEditTime: 2021-01-13 16:40:21
  * @FilePath: \spuer_mall\src\views\detail\childComps\childShopInfo.vue
  * @Description: 
 -->
@@ -36,7 +36,7 @@
         <img :src="shop.logo" alt="" />{{ shop.name }}
       </div>
       <div class="shop-btn">
-        <button>进店逛逛</button>
+        <button @click="goToFoodDetail">进店逛逛</button>
         <button>全部宝贝</button>
       </div>
     </wrapper>
@@ -66,6 +66,9 @@ export default {
     storeServicesColor(isColor) {
       return isColor ? { color: "red" } : { color: "#41b782" };
     },
+    goToFoodDetail(){
+      this.$router.push("/food-detail");
+    }
   },
   computed: {},
   //过滤器
