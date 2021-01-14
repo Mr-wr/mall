@@ -9,6 +9,7 @@ const Category = () => import("views/category/Category");
 const Profile = () => import("views/profile/Profile");
 const Detail = () => import("views/detail/Detail");
 const Store = () => import("views/store/Store");
+const FoodDetail = () => import("views/detail/childComps/FoodDetail");
 const routes = [
   {
     path: "",
@@ -52,6 +53,13 @@ const routes = [
   {
     path: "/store",
     component: Store
+  },
+  {
+    path: "/food-detail",
+    component: FoodDetail,
+    meta: {
+      title: "商品详情"
+    },
   }
 ];
 
