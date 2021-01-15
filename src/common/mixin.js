@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2021-01-09 18:22:05
  * @LastEditors: qi-you
- * @LastEditTime: 2021-01-13 12:09:34
+ * @LastEditTime: 2021-01-14 21:47:48
  * @FilePath: \spuer_mall\src\common\mixin.js
  * @Description:
  */
@@ -24,5 +24,12 @@ export const imgLodeMixin = {
     imgLoaded() {
       this.$emit("imgLoade");
     }
+  }
+};
+
+import { mapGetters } from "vuex";
+export const mapGettersCartMixin = {
+  computed: {
+    ...mapGetters(["getCartList", "getCartListLength"])
   }
 };

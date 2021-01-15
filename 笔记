@@ -18,7 +18,9 @@ console.log(...letters)//-> 1 2 3 4 5 6 7
         }, delay);
       };
     },
-
+-------------------离开组件后不监听某个事件
+如果只有一个事件的名字，以这个名字的事件全部都会取消掉
+this.$off([事件名字],)
 
 
 -----------------------------事件总线
@@ -27,8 +29,19 @@ this.$bus.$emit
 接收
 this.$bus.$on
 
+---------------mapGetters
+可以直接绑定app中的计算属性
 
+再app中
+imp {mapGetters}  vuex
 
+computed:{
+  ...mapGetters(["getter的名字"])
+  // 或者这样写
+  ...mapGetters{
+    "自己命名":"getter的名字"
+  }
+}
 
 
 ----------------------------mixin混入
@@ -55,7 +68,25 @@ mounted(){
 
 
 
-
+---------------------数组方法
+-------find
+和filter功能一样
+但是返回的是它本身对象改变返回的值原来的对象也会被改变
+例如：
+let cart=[{name:"name1"},{name:"name2"}];
+undefined
+cart.find(item => item.name == "name1").count=1;
+1
+cart
+(2) [{…}, {…}]0: {name: "name1", count: 1}1: {name: "name2"}length: 2__proto__: Array(0)
+cart.filter(item=>item.name=="name2").count=2;
+2
+cart
+(2) [{…}, {…}]0: {name: "name1", count: 1}1: {name: "name2"}length: 2__proto__: Array(0)
+cart.filter(item=>item.name=="name2")
+[{…}]0: {name: "name2"}length: 1__proto__: Array(0)
+cart.find(item => item.name == "name1")
+{name: "name1", count: 1}
 
 
 

@@ -2,21 +2,31 @@
  * @Author: qi-you
  * @Date: 2020-12-01 17:45:21
  * @LastEditors: qi-you
- * @LastEditTime: 2020-12-01 17:45:22
+ * @LastEditTime: 2021-01-14 21:50:39
  * @Descripttion: 
 -->
 <template>
-  <div>
-    <h2>购物车</h2>
+  <div class="cart">
+    <!-- <h2>购物车</h2> -->
+    <nav-bar class="nav-bar" bgcolor="#ff8198">
+      <div slot="center" class="home-font">购物车({{ getCartListLength }})</div>
+    </nav-bar>
+    <cart-list></cart-list>
   </div>
 </template>
 
 <script>
+import NavBar from "common/navbar/NavBar";
+import CartList from "./childComps/CartList";
+import { mapGettersCartMixin } from "@/common/mixin";
+
 export default {
-
-}
+  components: { NavBar, CartList },
+  mixins: [mapGettersCartMixin]
+};
 </script>
-
-<style>
-
+<style scoped>
+.cart {
+  height: 100vh;
+}
 </style>

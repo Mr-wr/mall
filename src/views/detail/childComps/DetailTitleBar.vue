@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2020-12-24 16:57:29
  * @LastEditors: qi-you
- * @LastEditTime: 2021-01-03 04:55:05
+ * @LastEditTime: 2021-01-13 11:05:35
  * @Descripttion: 
 -->
 <template>
@@ -32,7 +32,7 @@ export default {
   data() {
     return {
       titleArray: ["商品", "参数", "评论", "推荐"],
-      currentIndex: 0,
+      currentIndex: 0
     };
   },
   methods: {
@@ -44,13 +44,13 @@ export default {
       this.currentIndex = index;
       // 判断那一个被点击
       this.$emit("titleClick", this.currentIndex);
-    },
+    }
   },
-  deactivated() {},
+  deactivated() {}
 };
 </script>
 
-<style>
+<style scoped>
 .title {
   display: flex;
   justify-content: space-around;

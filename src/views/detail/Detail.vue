@@ -35,7 +35,7 @@
     </scroll>
     <back-top @click.native="scrollToTop" v-show="isShowBackTop"></back-top>
     <!-- <shop-tab-bar></shop-tab-bar> -->
-    <detail-bottom-bar></detail-bottom-bar>
+    <detail-bottom-bar @addCart="addCart"></detail-bottom-bar>
   </div>
 </template>
 <script>
@@ -66,44 +66,43 @@ export default {
     DetailInfo,
     childComment,
     childShopRecommend,
-    DetailBottomBar,
+    DetailBottomBar
   },
   mixins: [backtopMixin],
   data() {
     return {
       iid: {
-        type: String,
+        type: String
       },
       topImages: [],
       goods: {
         type: Object,
         default() {
           return {};
-        },
+        }
       },
       shop: {
         type: Object,
         default() {
           return {};
-        },
+        }
       },
       detailInfo: {
         type: Object,
         default() {
           return {};
-        },
+        }
       },
       shopImgtime: null,
       commentInfo: {},
       recommends: [],
       recommendTitleY: [0, 300],
 
-      currentIndex: 0,
+      currentIndex: 0
     };
   },
   methods: {
     // 事件监听
-
     // 详情图片加载完成后
     imgLoad() {
       this.shopImgtime && clearTimeout(this.shopImgtime);
@@ -122,6 +121,18 @@ export default {
       this.$refs.scroll.scrollTo(0, -(this.recommendTitleY[index] - 45));
     },
 
+    // 添加购物车
+    addCart() {
+      const product = {};
+      product.image = this.topImages[0];
+      product.title = this.goods.title;
+      product.desc = this.goods.desc;
+      product.price = this.goods.newPrice;
+      product.iid = this.iid;
+      this.$store.commit("addCart", product);
+      // console.log(product);
+    },
+
     // 监听滚轮
     scrollRealTime(position) {
       // 滚轮对应titleBar实时位置
@@ -132,7 +143,7 @@ export default {
           -position.y >= this.recommendTitleY[index] - 45 &&
           -position.y <= this.recommendTitleY[index + 1] - 45
         ) {
-          console.log("==");
+          // console.log("==");
           this.$refs.titleBar.currentIndex = index;
           this.currentIndex = index;
         }
@@ -151,14 +162,14 @@ export default {
       // }
       // console.log("----");
       this.isShowBackTop = -position.y > 1000;
-    },
+    }
   },
   created() {
     // 1.保存传入的iid
     this.iid = this.$route.params.iid;
 
     // 2.根据iid获取数据
-    getDetail(this.iid).then((res) => {
+    getDetail(this.iid).then(res => {
       const data = res.result;
 
       // 3.获取轮播图数据
@@ -187,12 +198,12 @@ export default {
     });
 
     // 3、获取推荐数据
-    getRecommends(this.iid).then((res) => {
+    getRecommends(this.iid).then(res => {
       this.recommends = res.data.list;
     });
   },
   mounted() {},
-  activated() {},
+  activated() {}
 };
 </script>
 
@@ -203,11 +214,13 @@ export default {
   z-index: 9;
   height: 100vh;
 }
+
 .title-bar {
   position: relative;
   background-color: #f0f0f0;
   z-index: 9;
 }
+
 .detail-scroll {
   height: calc(100% - 94px);
 }
