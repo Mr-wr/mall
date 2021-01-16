@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2020-12-01 17:45:21
  * @LastEditors: qi-you
- * @LastEditTime: 2021-01-14 21:50:39
+ * @LastEditTime: 2021-01-16 10:28:21
  * @Descripttion: 
 -->
 <template>
@@ -19,7 +19,6 @@
 import NavBar from "common/navbar/NavBar";
 import CartList from "./childComps/CartList";
 import { mapGettersCartMixin } from "@/common/mixin";
-
 export default {
   components: { NavBar, CartList },
   mixins: [mapGettersCartMixin]

@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2021-01-12 21:03:08
  * @LastEditors: qi-you
- * @LastEditTime: 2021-01-13 20:09:00
+ * @LastEditTime: 2021-01-16 18:58:03
  * @FilePath: \spuer_mall\src\views\detail\childComps\FoodDetail.vue
  * @Description: 
 -->
@@ -98,7 +98,7 @@
             <div class="total">
               <div>
                 Total
-                Cost(总成本价)...............................................................................
+                Cost(总成本价)........................................................................................
                 <span>{{ this.totalCost | showPrice }}</span>
               </div>
               <div>
@@ -187,7 +187,7 @@ export default {
   //过滤器
   filters: {
     showPrice(price) {
-      return "$" + price.toFixed(2);
+      return "$" + price.toFixed(0);
     }
   },
   methods: {
@@ -195,15 +195,41 @@ export default {
       this.$router.go(-1);
     }
   },
-  mounted() {
+  destroyed() {
     this.$refs.scroll.refresh();
+  },
+  mounted(){
+    /* 原可视区域 */
+    var oldHeight=window.innerHeight;
+    // window.addEventListener("resize",function () {
+    //     /* safari浏览器的操作栏隐藏时可视区域会变大 */
+    //     // if(window.innerHeight>oldHeight){
+    //     //     /*
+    //     //         #tabBar 是底部导航栏的选择器
+    //     //         通过 修改style值 或 改变class值 请自行决定
+    //     //      */
+    //     //     document.querySelector("#tabBar").style.paddingBottom="34px";
+    //     // }else {
+    //     //     document.querySelector("#tabBar").style.paddingBottom="0px";
+    //     // }
+    // }
+
+
+
+
+
+
+
+
+
+
   }
 };
 </script>
 
 <style scoped>
 * {
-  font-size: 12px;
+  /* font-size: 12px; */
 }
 
 .food-detail {
@@ -213,7 +239,8 @@ export default {
   z-index: 10;
 }
 .scroll {
-  height: calc(100%);
+  height: calc(100% - 47px);
+  overflow: hidden;
 }
 /* title */
 .detail-title {

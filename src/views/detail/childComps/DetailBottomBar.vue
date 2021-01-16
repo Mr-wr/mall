@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2021-01-09 16:31:27
  * @LastEditors: qi-you
- * @LastEditTime: 2021-01-14 09:52:17
+ * @LastEditTime: 2021-01-16 19:14:58
  * @FilePath: \spuer_mall\src\views\detail\childComps\DetailBottomBar.vue
  * @Description: 
 -->
@@ -42,7 +42,7 @@ export default {
 <style scoped>
 .bottom-bar {
   display: flex;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   right: 0;

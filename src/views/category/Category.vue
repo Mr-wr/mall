@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2020-12-01 17:44:50
  * @LastEditors: qi-you
- * @LastEditTime: 2021-01-13 10:39:07
+ * @LastEditTime: 2021-01-16 11:42:04
  * @Descripttion: 
 -->
 <template>
@@ -174,14 +174,17 @@ export default {
 .scroll {
   height: calc(100%);
 }
-.a {
+.category {
   /* position: fixed;
   left: 0;
   bottom: 0; */
   /* width: 100%; */
-  background-color: red;
+  position: relative;
+  background-color: #fff;
+  height: 100vh;
   padding-bottom: constant(safe-area-inset-bottom); /*兼容 IOS<11.2*/
   padding-bottom: env(safe-area-inset-bottom); /*兼容 IOS>11.2*/
+  z-index: 10;
 }
 .b {
   background-color: green;
