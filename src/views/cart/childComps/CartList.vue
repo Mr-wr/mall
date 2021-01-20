@@ -2,22 +2,22 @@
  * @Author: qi-you
  * @Date: 2021-01-14 20:26:49
  * @LastEditors: qi-you
- * @LastEditTime: 2021-01-16 09:55:50
+ * @LastEditTime: 2021-01-20 10:41:39
  * @FilePath: \spuer_mall\src\views\cart\childComps\CartList.vue
  * @Description: 
 -->
 <template>
   <div class="cart-list">
-    <div class="a">
-      {{ getCartList }}
-    </div>
     <scroll ref="scroll" class="scroll-content">
-      <cart-list-item
-        v-for="item in getCartList"
-        :key="item.iid"
-        :item-info="item"
-      ></cart-list-item>
+      <wrapper class="wrapper" v-if="getCartListLength > 0">
+        <cart-list-item
+          v-for="item in getCartList"
+          :key="item.iid"
+          :item-info="item"
+        ></cart-list-item
+      ></wrapper>
     </scroll>
+    <cart-bottom-bar></cart-bottom-bar>
   </div>
 </template>
 
@@ -25,11 +25,15 @@
 import Scroll from "common/scroll/Scroll";
 import CartListItem from "./CartListItem";
 import { mapGettersCartMixin } from "@/common/mixin";
+import CartBottomBar from "./CartBottomBar";
+import Wrapper from "content/wrapper/Wrapper";
 
 export default {
   components: {
     Scroll,
-    CartListItem
+    CartListItem,
+    CartBottomBar,
+    Wrapper
   },
   mixins: [mapGettersCartMixin],
   activated() {
@@ -41,8 +45,13 @@ export default {
 
 <style scoped>
 .cart-list {
-  height: calc(100% - 44px - 47px);
+  /* position: relative; */
+  height: calc(100% - 44px - 47px - 40px);
   overflow: hidden;
+  background-color: #eee;
+}
+.cart-list .wrapper {
+  margin-bottom: 10px;
 }
 .scroll-content {
   height: 100%;

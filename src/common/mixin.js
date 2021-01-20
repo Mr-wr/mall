@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2021-01-09 18:22:05
  * @LastEditors: qi-you
- * @LastEditTime: 2021-01-14 21:47:48
+ * @LastEditTime: 2021-01-19 21:17:12
  * @FilePath: \spuer_mall\src\common\mixin.js
  * @Description:
  */
@@ -30,6 +30,15 @@ export const imgLodeMixin = {
 import { mapGetters } from "vuex";
 export const mapGettersCartMixin = {
   computed: {
-    ...mapGetters(["getCartList", "getCartListLength"])
+    ...mapGetters(["getCartList", "getCartListLength", "getStateIsAllSelect"])
+  }
+};
+
+export const filtersMixin = {
+  //过滤器
+  filters: {
+    showPrice(price) {
+      return "￥" + (price * 1).toFixed(2);
+    }
   }
 };

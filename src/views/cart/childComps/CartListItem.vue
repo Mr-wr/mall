@@ -22,18 +22,25 @@
 
 <script>
 import CheckButton from "./CheckButton";
-
+import { mapGettersCartMixin } from "@/common/mixin";
 export default {
   name: "ShopCartItem",
+  mixins: [mapGettersCartMixin],
   props: {
     itemInfo: Object
   },
   components: {
-    CheckButton
+    CheckButton,
+    mapGettersCartMixin
   },
   methods: {
     checkedChange: function() {
       this.itemInfo.isSelect = !this.itemInfo.isSelect;
+      // 判断是否全选-修改cart中isAllSelect的值
+      this.getCartList.filter(item => item.isSelect).length ==
+      this.getCartListLength
+        ? this.$store.commit("setIsAllSelect", true)
+        : this.$store.commit("setIsAllSelect", false);
     }
   }
 };
@@ -45,7 +52,7 @@ export default {
   display: flex;
   font-size: 0;
   padding: 5px;
-  border-bottom: 1px solid #ccc;
+  /* border-bottom: 1px solid #ccc; */
 }
 
 .item-selector {

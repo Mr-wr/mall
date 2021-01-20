@@ -31,7 +31,6 @@ export default {
   },
   watch: {
     value: function(newValue) {
-      console.log("点击", newValue);
       this.checked = newValue;
     }
   }

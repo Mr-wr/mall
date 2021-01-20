@@ -2,13 +2,14 @@
  * @Author: qi-you
  * @Date: 2021-01-14 09:33:38
  * @LastEditors: qi-you
- * @LastEditTime: 2021-01-16 10:30:34
+ * @LastEditTime: 2021-01-20 10:16:35
  * @FilePath: \spuer_mall\src\store\cart.js
  * @Description:
  */
 export const cartModule = {
   state: {
-    cartList: []
+    cartList: [],
+    isAllSelect: true
   },
   mutations: {
     addCart(state, playload) {
@@ -21,6 +22,9 @@ export const cartModule = {
         playload.isSelect = true;
         state.cartList.push(playload);
       }
+    },
+    setIsAllSelect(state, playload) {
+      state.isAllSelect = playload;
     }
   },
   actions: {},
@@ -30,6 +34,9 @@ export const cartModule = {
     },
     getCartListLength(state) {
       return state.cartList.length;
+    },
+    getStateIsAllSelect(state) {
+      return state.isAllSelect;
     }
   }
 };
