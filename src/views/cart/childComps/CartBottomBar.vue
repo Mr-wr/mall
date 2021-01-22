@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2021-01-19 20:08:47
  * @LastEditors: qi-you
- * @LastEditTime: 2021-01-20 10:40:49
+ * @LastEditTime: 2021-01-20 11:00:46
  * @FilePath: \spuer_mall\src\views\cart\childComps\CartBottomBar.vue
  * @Description: 
 -->
@@ -12,7 +12,9 @@
       @checkBtnClick="checkedChange"
       :value="getStateIsAllSelect"
     ></check-button>
-    总共{{ totalPrice | showPrice }}
+    全选
+    <span class="total-price">合计: {{ totalPrice | showPrice }}</span>
+    <span class="buy-product">去计算({{ getCartCount }})</span>
   </div>
 </template>
 
@@ -71,7 +73,23 @@ export default {
   bottom: 49px;
   left: 0;
   right: 0;
-  height: 40px;
+  height: 44px;
   background-color: #eee;
+}
+
+.bottom-bar .total-price {
+  margin-left: 15px;
+  font-size: 16px;
+  color: #666;
+}
+
+.bottom-bar .buy-product {
+  background-color: orangered;
+  color: #fff;
+  width: 100px;
+  height: 44px;
+  text-align: center;
+  line-height: 44px;
+  float: right;
 }
 </style>

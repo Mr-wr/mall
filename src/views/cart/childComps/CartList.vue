@@ -2,20 +2,18 @@
  * @Author: qi-you
  * @Date: 2021-01-14 20:26:49
  * @LastEditors: qi-you
- * @LastEditTime: 2021-01-20 10:41:39
+ * @LastEditTime: 2021-01-20 11:08:36
  * @FilePath: \spuer_mall\src\views\cart\childComps\CartList.vue
  * @Description: 
 -->
 <template>
   <div class="cart-list">
     <scroll ref="scroll" class="scroll-content">
-      <wrapper class="wrapper" v-if="getCartListLength > 0">
-        <cart-list-item
-          v-for="item in getCartList"
-          :key="item.iid"
-          :item-info="item"
-        ></cart-list-item
-      ></wrapper>
+      <cart-list-item
+        v-for="item in getCartList"
+        :key="item.iid"
+        :item-info="item"
+      ></cart-list-item>
     </scroll>
     <cart-bottom-bar></cart-bottom-bar>
   </div>
@@ -26,14 +24,11 @@ import Scroll from "common/scroll/Scroll";
 import CartListItem from "./CartListItem";
 import { mapGettersCartMixin } from "@/common/mixin";
 import CartBottomBar from "./CartBottomBar";
-import Wrapper from "content/wrapper/Wrapper";
-
 export default {
   components: {
     Scroll,
     CartListItem,
-    CartBottomBar,
-    Wrapper
+    CartBottomBar
   },
   mixins: [mapGettersCartMixin],
   activated() {

@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2021-01-09 18:22:05
  * @LastEditors: qi-you
- * @LastEditTime: 2021-01-19 21:17:12
+ * @LastEditTime: 2021-01-20 11:00:59
  * @FilePath: \spuer_mall\src\common\mixin.js
  * @Description:
  */
@@ -30,7 +30,12 @@ export const imgLodeMixin = {
 import { mapGetters } from "vuex";
 export const mapGettersCartMixin = {
   computed: {
-    ...mapGetters(["getCartList", "getCartListLength", "getStateIsAllSelect"])
+    ...mapGetters([
+      "getCartList",
+      "getCartListLength",
+      "getStateIsAllSelect",
+      "getCartCount"
+    ])
   }
 };
 

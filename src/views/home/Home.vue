@@ -16,7 +16,8 @@
       @tabClick="tabClick"
       :itemArray="['流行', '新款', '精选']"
       v-show="isTab1Show"
-    ></tab-control>
+    >
+    </tab-control>
     <scroll
       class="wrapper"
       ref="scroll"
@@ -60,9 +61,18 @@ export default {
       banners: [],
       recommends: [],
       goods: {
-        pop: { page: 1, list: [] },
-        new: { page: 1, list: [] },
-        sell: { page: 1, list: [] },
+        pop: {
+          page: 1,
+          list: []
+        },
+        new: {
+          page: 1,
+          list: []
+        },
+        sell: {
+          page: 1,
+          list: []
+        }
       },
       currentType: "pop",
       isShowBackTop: false,
@@ -70,13 +80,13 @@ export default {
       isFixed: false,
       scrollCurrentIndex: 0,
       isTab1Show: false,
-      saveY: 0,
+      saveY: 0
     };
   },
   computed: {
     showGoods() {
       return this.goods[this.currentType].list;
-    },
+    }
   },
   components: {
     NavBar,
@@ -86,7 +96,7 @@ export default {
     TabControl,
     GoodsList,
     Scroll,
-    BackTop,
+    BackTop
   },
   created() {
     // 获取multdata
@@ -137,21 +147,21 @@ export default {
     // 网络请求
     getHomeMultidata() {
       getHomeMultidata()
-        .then((res) => {
+        .then(res => {
           // console.log("app", data);
           this.banners = res.data.banner.list;
           this.recommends = res.data.recommend.list;
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
         });
     },
     getHomeData(type) {
-      getHomeData(type, this.goods[type].page++).then((res) => {
+      getHomeData(type, this.goods[type].page++).then(res => {
         this.goods[type].list.push(...res.data.list);
         this.$refs.scroll.finishPullUp();
       });
-    },
+    }
   },
   mounted() {
     // 图片加载
@@ -172,7 +182,7 @@ export default {
     // 离开前回去位置
     this.saveY = this.$refs.scroll.getY();
     // 取消全局的监听
-  },
+  }
 };
 </script>
 
@@ -182,6 +192,7 @@ export default {
   padding-top: 44px;
   height: 100vh;
 }
+
 .home-bar {
   position: fixed;
   top: 0;
@@ -190,9 +201,11 @@ export default {
   background-color: var(--color-tint);
   z-index: 1;
 }
+
 .home-font {
   color: #fff;
 }
+
 .wrapper {
   position: absolute;
   top: 44px;
@@ -200,10 +213,9 @@ export default {
   right: 0;
   bottom: 49px;
 }
+
 .tab1 {
   position: relative;
   z-index: 2;
 }
 </style>
-
-

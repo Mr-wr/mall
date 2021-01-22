@@ -2,7 +2,7 @@
  * @Author: qi-you
  * @Date: 2021-01-14 09:33:38
  * @LastEditors: qi-you
- * @LastEditTime: 2021-01-20 10:16:35
+ * @LastEditTime: 2021-01-20 11:33:50
  * @FilePath: \spuer_mall\src\store\cart.js
  * @Description:
  */
@@ -27,7 +27,9 @@ export const cartModule = {
       state.isAllSelect = playload;
     }
   },
-  actions: {},
+  actions: {
+    
+  },
   getters: {
     getCartList(state) {
       return state.cartList;
@@ -37,6 +39,9 @@ export const cartModule = {
     },
     getStateIsAllSelect(state) {
       return state.isAllSelect;
+    },
+    getCartCount(state) {
+      return state.cartList.reduce((total, item) => total + item.count, 0);
     }
   }
 };
